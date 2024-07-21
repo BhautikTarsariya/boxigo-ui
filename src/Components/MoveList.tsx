@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MoveItem from "./MoveItem";
 import { fetchData } from "../API/api";
+import { IconLoader } from "@tabler/icons-react";
 
 const MoveList = () => {
   const [moveData, setMoveData] = useState<any>();
@@ -22,8 +23,9 @@ const MoveList = () => {
 
       {/* Loader while fatching Data */}
       {loading && (
-        <div className="flex flex-col gap-2 text-center justify-center items-center mt-10">
-          <p className="text-[#ef4444] font-bold">Loading...</p>
+        <div className="flex gap-2 text-center justify-center items-center mt-10">
+          <IconLoader stroke={2} className="animate-spin" size={36} />
+          <p className="text-[#ef4444] font-bold"> Loading Content ...</p>
         </div>
       )}
 
