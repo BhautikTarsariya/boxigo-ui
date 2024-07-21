@@ -46,7 +46,10 @@ const AccordionItem = ({ title, count, isOpen, onToggle, item }: any) => {
                         el.type.map((type: any, ind: number) => (
                           <>
                             {type.selected === true && (
-                              <span className="block font-semibold mt-[-15px] text-xs">
+                              <span
+                                className="block font-semibold mt-[-15px] text-xs"
+                                key={ind}
+                              >
                                 {type?.option?.split(",")}
                               </span>
                             )}
