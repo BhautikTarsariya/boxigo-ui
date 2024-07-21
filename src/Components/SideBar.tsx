@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import {
   IconTruckDelivery,
@@ -8,8 +8,6 @@ import {
 } from "@tabler/icons-react";
 
 const Sidebar = () => {
-  const [open, setOpen] = useState<boolean>(true);
-
   const menuItems = [
     {
       icons: <IconTruckDelivery stroke={2} />,
