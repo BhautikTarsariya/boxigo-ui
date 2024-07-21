@@ -4,25 +4,14 @@ import { fetchData } from "../API/api";
 
 const MoveList = () => {
   const [moveData, setMoveData] = useState<any>();
-  const [openMoveIndex, setOpenMoveIndex] = useState<any>(null);
-
-  const handleToggle = (index: number) => {
-    if (openMoveIndex === index) {
-      setOpenMoveIndex(null);
-    } else {
-      setOpenMoveIndex(index);
-    }
-  };
+  const [loading, setLoading] = useState<Boolean>(false);
 
   useEffect(() => {
-    fetchData()
-      .then((response) => {
-        console.log(response.data.Customer_Estimate_Flow);
-        setMoveData(response.data.Customer_Estimate_Flow);
-      })
-      .catch((err) => {
-        console.error("err", err);
-      });
+    setLoading(true);
+    fetchData().then((response) => {
+      setMoveData(response.data.Customer_Estimate_Flow);
+      setLoading(false);
+    });
   }, []);
 
   return (
@@ -30,15 +19,19 @@ const MoveList = () => {
       <h1 className="flex items-center text-2xl font-extrabold mb-6">
         My Moves
       </h1>
+
+      {/* Loader while fatching Data */}
+      {loading && (
+        <div className="flex flex-col gap-2 text-center justify-center items-center mt-10">
+          <p className="text-[#ef4444] font-bold">Loading Content ...</p>
+        </div>
+      )}
+
+      {/* Moves Item Component */}
       <div className="space-y-4">
         {moveData &&
           moveData.map((items: any, index: number) => (
-            <MoveItem
-              key={items.estimate_id}
-              moveData={items}
-              isOpen={openMoveIndex === index}
-              onToggle={() => handleToggle(index)}
-            />
+            <MoveItem key={index} moveData={items} />
           ))}
       </div>
     </div>

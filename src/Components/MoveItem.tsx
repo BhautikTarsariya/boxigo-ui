@@ -11,8 +11,9 @@ import {
 } from "@tabler/icons-react";
 import AccordionItem from "./AccordionItem";
 
-const MoveItem = ({ moveData, isOpen, onToggle }: any) => {
+const MoveItem = ({ moveData }: any) => {
   const [openItem, setOpenItem] = useState<string | null>(null);
+  const [showDetails, setShowDetails] = useState(false);
 
   const handleToggle = (title: string) => {
     setOpenItem(openItem === title ? null : title);
@@ -36,7 +37,7 @@ const MoveItem = ({ moveData, isOpen, onToggle }: any) => {
   };
 
   return (
-    <div className="border-b border-red-600">
+    <div className="border-b border-red-600 transition-all duration-150 hover:border hover:border-[#ef4444] py-5 px-3 hover:rounded-lg animate-[slideup_0.5s]">
       <div className="flex justify-between text-sm mb-8 text-left">
         <div className="w-1/4">
           <p className="text-black font-extrabold">From</p>
@@ -83,380 +84,43 @@ const MoveItem = ({ moveData, isOpen, onToggle }: any) => {
         <div className="flex items-center space-x-2">
           <button
             className="text-[#ef4444] border border-[#ef4444] rounded px-4 py-2"
-            onClick={() => {
-              onToggle();
-              setOpenItem(null);
-            }}
+            onClick={() => setShowDetails(!showDetails)}
           >
-            {isOpen ? "Hide move details" : "View move details"}
+            {showDetails ? "Hide move details" : "View move details"}
           </button>
           <button className="text-white bg-[#ef4444] rounded px-4 py-2">
             {moveData.custom_status}
           </button>
         </div>
       </div>
-      <div className="flex items-center space-x-2 text-sm text-left mb-8">
+      <div className="flex items-center space-x-2 text-sm text-left">
         <IconAlertTriangleFilled color="#ef4444" stroke={2} size={18} />
         <span className=" text-black font-extrabold">Disclaimer:</span>
         <span> Please update your move date before two days of shifting</span>
       </div>
-      {isOpen && (
+
+      {/* View Move Details  */}
+      {showDetails && (
         <>
-          <div className="flex items-center space-x-4 text-sm mb-6">
+          <div className="flex items-center space-x-4 text-sm mt-8 mb-6">
             <h1 className="font-extrabold text-left">Inventory Details</h1>
             <button className="text-white bg-black rounded px-4 py-2">
               Edit Inventory
             </button>
           </div>
           <div className="mb-6">
-            <AccordionItem
-              title="Living Room"
-              count={15}
-              isOpen={openItem === "Living Room"}
-              onToggle={() => handleToggle("Living Room")}
-            >
-              <div className="flex text-left space-x-16">
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Furnitures</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between">
-                      <span className="mb-1">1 Seater Sofa</span>
-                      <span className="font-bold">2</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Wooden</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">3 Seater Sofa</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Wooden</span>
-                    <li className="flex justify-between mb-5">
-                      <span>TV Cabinet</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Study table</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">medium</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Teapoy</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Glass top</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Shoe Rack</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Plastic Chair</span>
-                      <span className="font-bold">2</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Electricals</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between">
-                      <span className="mb-1">LCD TV</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">30-40 inch</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Home Theatre</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">
-                      3+1 Speakers
-                    </span>
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Ceiling Fan</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Fragile</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Bulb</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Picture / Poster / Painting</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Clock</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                  </ul>
-                </div>
-              </div>
-            </AccordionItem>
-            <AccordionItem
-              title="Bed Room"
-              count={6}
-              isOpen={openItem === "Bed Room"}
-              onToggle={() => handleToggle("Bed Room")}
-            >
-              <div className="flex text-left space-x-16">
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Furnitures</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between">
-                      <span className="mb-1">1 Seater Sofa</span>
-                      <span className="font-bold">2</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Wooden</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">3 Seater Sofa</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Wooden</span>
-                    <li className="flex justify-between mb-5">
-                      <span>TV Cabinet</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Study table</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">medium</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Teapoy</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Glass top</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Shoe Rack</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Plastic Chair</span>
-                      <span className="font-bold">2</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Electricals</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between">
-                      <span className="mb-1">LCD TV</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">30-40 inch</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Home Theatre</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">
-                      3+1 Speakers
-                    </span>
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Ceiling Fan</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Fragile</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Bulb</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Picture / Poster / Painting</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Clock</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                  </ul>
-                </div>
-              </div>
-            </AccordionItem>
-            <AccordionItem
-              title="Kitchen"
-              count={7}
-              isOpen={openItem === "Kitchen"}
-              onToggle={() => handleToggle("Kitchen")}
-            >
-              <div className="flex text-left space-x-16">
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Furnitures</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between">
-                      <span className="mb-1">1 Seater Sofa</span>
-                      <span className="font-bold">2</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Wooden</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">3 Seater Sofa</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Wooden</span>
-                    <li className="flex justify-between mb-5">
-                      <span>TV Cabinet</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Study table</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">medium</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Teapoy</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Glass top</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Shoe Rack</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Plastic Chair</span>
-                      <span className="font-bold">2</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Electricals</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between">
-                      <span className="mb-1">LCD TV</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">30-40 inch</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Home Theatre</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">
-                      3+1 Speakers
-                    </span>
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Ceiling Fan</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Fragile</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Bulb</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Picture / Poster / Painting</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Clock</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                  </ul>
-                </div>
-              </div>
-            </AccordionItem>
-            <AccordionItem
-              title="Bathroom"
-              count={4}
-              isOpen={openItem === "Bathroom"}
-              onToggle={() => handleToggle("Bathroom")}
-            >
-              <div className="flex text-left space-x-16">
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Furnitures</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between">
-                      <span className="mb-1">1 Seater Sofa</span>
-                      <span className="font-bold">2</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Wooden</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">3 Seater Sofa</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Wooden</span>
-                    <li className="flex justify-between mb-5">
-                      <span>TV Cabinet</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Study table</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">medium</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Teapoy</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">Glass top</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Shoe Rack</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Plastic Chair</span>
-                      <span className="font-bold">2</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Electricals</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between">
-                      <span className="mb-1">LCD TV</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">30-40 inch</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Home Theatre</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">
-                      3+1 Speakers
-                    </span>
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Ceiling Fan</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-1/5">
-                  <h1 className="text-xl font-extrabold mb-4">Fragile</h1>
-                  <ul className="text-sm">
-                    <li className="flex justify-between mb-5">
-                      <span className="mb-1">Bulb</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Picture / Poster / Painting</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                    <li className="flex justify-between">
-                      <span className="mb-1">Clock</span>
-                      <span className="font-bold">1</span>
-                    </li>
-                    <span className="block font-semibold mb-5">small</span>
-                  </ul>
-                </div>
-              </div>
-            </AccordionItem>
+            {moveData.items &&
+              moveData.items.inventory &&
+              moveData.items.inventory.map((item: any, index: number) => (
+                <AccordionItem
+                  title={item.displayName}
+                  count={item?.category?.length}
+                  isOpen={openItem === item.displayName}
+                  onToggle={() => handleToggle(item.displayName)}
+                  key={index}
+                  item={item}
+                />
+              ))}
           </div>
           <div className="flex items-center space-x-4 text-sm mb-8">
             <h1 className="font-extrabold text-left">House Details</h1>
