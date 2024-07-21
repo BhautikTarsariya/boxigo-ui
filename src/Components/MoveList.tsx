@@ -23,7 +23,7 @@ const MoveList = () => {
       {/* Loader while fatching Data */}
       {loading && (
         <div className="flex flex-col gap-2 text-center justify-center items-center mt-10">
-          <p className="text-[#ef4444] font-bold">Loading Content ...</p>
+          <p className="text-[#ef4444] font-bold">Loading...</p>
         </div>
       )}
 

@@ -37,7 +37,7 @@ const MoveItem = ({ moveData }: any) => {
   };
 
   return (
-    <div className="border-b border-red-600 transition-all duration-150 hover:border hover:border-[#ef4444] py-5 px-3 hover:rounded-lg animate-[slideup_0.5s]">
+    <div className="border-b border-[#ef4444] cursor-pointer transition-all duration-150 hover:border hover:border-[#ef4444] py-5 px-3 hover:rounded-lg animate-[slideup_0.5s]">
       <div className="flex justify-between text-sm mb-8 text-left">
         <div className="w-1/4">
           <p className="text-black font-extrabold">From</p>
